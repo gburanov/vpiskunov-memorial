@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>In Loving Memory</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400&display=swap');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #f5f0eb;
+    --dark: #2c2c2c;
+    --muted: #6b6360;
+    --accent: #8a7968;
+    --gold: #b8a88a;
+    --white: #ffffff;
+    --border: #d9d0c7;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    color: var(--dark);
+    background: var(--cream);
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(245,240,235,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    display: flex; justify-content: center; gap: 2.5rem;
+  }
+  nav a {
+    text-decoration: none; color: var(--muted);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem; letter-spacing: 1.5px;
+    text-transform: uppercase; transition: color 0.3s;
+  }
+  nav a:hover { color: var(--dark); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 6rem 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(184,168,138,0.12) 0%, transparent 70%);
+  }
+  .ornament {
+    font-size: 2.5rem; color: var(--gold); margin-bottom: 1.5rem;
+    letter-spacing: 0.5rem; opacity: 0.7;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300; font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--dark); margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+  }
+  .dates {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; color: var(--muted);
+    letter-spacing: 3px; margin-bottom: 2rem;
+  }
+  .hero-quote {
+    max-width: 560px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1.2rem;
+    color: var(--accent); line-height: 1.8;
+  }
+  .divider {
+    width: 60px; height: 1px;
+    background: var(--gold); margin: 2rem auto;
+  }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300; font-size: 2rem;
+    text-align: center; color: var(--dark);
+    letter-spacing: 2px; margin-bottom: 0.5rem;
+  }
+  .section-sub {
+    text-align: center; color: var(--gold);
+    font-size: 0.85rem; letter-spacing: 3px;
+    text-transform: uppercase; margin-bottom: 3rem;
+  }
+
+  /* OBITUARY */
+  .obituary { background: var(--white); }
+  .obituary-content {
+    max-width: 680px; margin: 0 auto;
+    text-align: center; color: var(--muted);
+    font-size: 1.05rem;
+  }
+  .obituary-content p { margin-bottom: 1.2rem; }
+
+  /* SERVICE DETAILS */
+  .services { background: var(--cream); }
+  .service-cards {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: box-shadow 0.3s;
+  }
+  .card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+  .card-icon {
+    font-size: 1.8rem; margin-bottom: 1rem; color: var(--gold);
+  }
+  .card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400; font-size: 1.3rem;
+    margin-bottom: 0.8rem; color: var(--dark);
+  }
+  .card p { color: var(--muted); font-size: 0.95rem; }
+
+  /* GALLERY */
+  .gallery-section { background: var(--white); }
+  .gallery-grid {
+    max-width: 900px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  .gallery-placeholder {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, var(--cream), #e8e0d8);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent); font-size: 0.85rem;
+    letter-spacing: 1px; text-transform: uppercase;
+    border: 1px solid var(--border);
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  /* GUESTBOOK / TRIBUTE */
+  .tribute { background: var(--cream); }
+  .tribute-form {
+    max-width: 560px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .tribute-form input,
+  .tribute-form textarea {
+    padding: 0.9rem 1.2rem;
+    border: 1px solid var(--border);
+    background: var(--white);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300; font-size: 0.95rem;
+    color: var(--dark); outline: none;
+    transition: border-color 0.3s;
+  }
+  .tribute-form input:focus,
+  .tribute-form textarea:focus {
+    border-color: var(--gold);
+  }
+  .tribute-form textarea { min-height: 130px; resize: vertical; }
+  .tribute-form button {
+    align-self: center;
+    padding: 0.8rem 2.5rem;
+    background: var(--accent);
+    color: var(--white);
+    border: none; cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: background 0.3s;
+  }
+  .tribute-form button:hover { background: var(--dark); }
+  #messages { max-width: 560px; margin: 2rem auto 0; }
+  .msg {
+    padding: 1.2rem; margin-bottom: 1rem;
+    background: var(--white); border: 1px solid var(--border);
+  }
+  .msg-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600; margin-bottom: 0.3rem;
+  }
+  .msg-text { color: var(--muted); font-size: 0.95rem; }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 3rem 2rem;
+    background: var(--dark); color: rgba(255,255,255,0.5);
+    font-size: 0.85rem; letter-spacing: 1px;
+  }
+  footer .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  /* FADE-IN ANIMATION */
+  .fade-in {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 600px) {
+    nav { gap: 1.2rem; padding: 0.8rem 1rem; }
+    nav a { font-size: 0.78rem; letter-spacing: 1px; }
+    section { padding: 3.5rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#obituary">Obituary</a>
+  <a href="#services">Services</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#tribute">Tribute</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="ornament">✦ ✦ ✦</div>
+  <h1>John William Smith</h1>
+  <p class="dates">March 12, 1945 &ensp;—&ensp; March 28, 2026</p>
+  <div class="divider"></div>
+  <p class="hero-quote">
+    "Those we love don't go away, they walk beside us every day.<br>
+    Unseen, unheard, but always near — still loved, still missed, and very dear."
+  </p>
+</section>
+
+<!-- OBITUARY -->
+<section class="obituary" id="obituary">
+  <h2 class="section-title fade-in">A Life Remembered</h2>
+  <p class="section-sub fade-in">Obituary</p>
+  <div class="obituary-content fade-in">
+    <p>John William Smith passed away peacefully on March 28, 2026, surrounded by his loving family. Born in Springfield on March 12, 1945, John was a devoted husband, father, and grandfather who touched countless lives with his warmth, humor, and generosity.</p>
+    <p>A proud veteran and dedicated community member, John spent over 30 years as a teacher, inspiring generations of students to pursue their dreams. He found joy in tending his garden, fishing at Lake Harmony, and Sunday dinners with the whole family gathered around his table.</p>
+    <p>He is survived by his wife of 52 years, Margaret; children Sarah (David) and Michael (Laura); grandchildren Emma, James, and Lily; and his brother Robert. He was preceded in death by his parents, William and Dorothy Smith.</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <h2 class="section-title fade-in">Service Details</h2>
+  <p class="section-sub fade-in">Gathering & Ceremony</p>
+  <div class="service-cards">
+    <div class="card fade-in">
+      <div class="card-icon">🕊</div>
+      <h3>Visitation</h3>
+      <p>Friday, April 3, 2026<br>4:00 PM – 7:00 PM<br><br>Grace Funeral Home<br>412 Oak Street, Springfield</p>
+    </div>
+    <div class="card fade-in">
+      <div class="card-icon">✝</div>
+      <h3>Funeral Service</h3>
+      <p>Saturday, April 4, 2026<br>10:00 AM<br><br>St. Mary's Church<br>200 Elm Avenue, Springfield</p>
+    </div>
+    <div class="card fade-in">
+      <div class="card-icon">🌿</div>
+      <h3>Interment</h3>
+      <p>Following the service<br><br>Evergreen Memorial Cemetery<br>880 River Road, Springfield</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="gallery">
+  <h2 class="section-title fade-in">Cherished Moments</h2>
+  <p class="section-sub fade-in">Photo Gallery</p>
+  <div class="gallery-grid fade-in">
+    <div class="gallery-placeholder">Photo 1</div>
+    <div class="gallery-placeholder">Photo 2</div>
+    <div class="gallery-placeholder">Photo 3</div>
+    <div class="gallery-placeholder">Photo 4</div>
+    <div class="gallery-placeholder">Photo 5</div>
+    <div class="gallery-placeholder">Photo 6</div>
+  </div>
+</section>
+
+<!-- TRIBUTE / GUESTBOOK -->
+<section class="tribute" id="tribute">
+  <h2 class="section-title fade-in">Leave a Tribute</h2>
+  <p class="section-sub fade-in">Share a Memory or Message</p>
+  <div class="tribute-form fade-in">
+    <input type="text" id="nameInput" placeholder="Your Name">
+    <textarea id="messageInput" placeholder="Share a memory or message of condolence..."></textarea>
+    <button onclick="postMessage()">Submit Tribute</button>
+  </div>
+  <div id="messages"></div>
+</section>
+
+<footer>
+  <p class="footer-name">John William Smith</p>
+  <p>Forever in our hearts &ensp;·&ensp; 1945 – 2026</p>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  // Simple guestbook (in-memory only)
+  const tributes = [];
+  function postMessage() {
+    const name = document.getElementById('nameInput').value.trim();
+    const text = document.getElementById('messageInput').value.trim();
+    if (!name || !text) return;
+    tributes.unshift({ name, text });
+    document.getElementById('nameInput').value = '';
+    document.getElementById('messageInput').value = '';
+    render();
+  }
+  function render() {
+    const container = document.getElementById('messages');
+    container.innerHTML = tributes.map(t =>
+      `<div class="msg"><p class="msg-name">${t.name}</p><p class="msg-text">${t.text}</p></div>`
+    ).join('');
+  }
+</script>
+
+</body>
+</html>
