@@ -168,6 +168,16 @@
   .contact-links a:hover {
     background: var(--dark); color: var(--white); border-color: var(--dark);
   }
+  .photo-link {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; color: var(--dark);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .photo-link:hover { color: var(--accent); border-color: var(--accent); }
 
   /* FOOTER */
   footer {
@@ -331,11 +341,13 @@
       <span class="lang-label">Русский</span>
       <p>Если хотите, пожалуйста, приносите или присылайте фотографии и воспоминания о&nbsp;Владимире.</p>
       <p class="note">Мы включим их в слайд-шоу на встрече.</p>
+      <p style="margin-top:1.2rem;"><a href="photos.html" class="photo-link">Открыть галерею →</a></p>
     </div>
     <div class="col-en block-content">
       <span class="lang-label">English</span>
       <p>If you would like, please bring or send photos and memories of Vladimir.</p>
       <p class="note">We will include them in the slideshow at the gathering.</p>
+      <p style="margin-top:1.2rem;"><a href="photos.html" class="photo-link">Open gallery →</a></p>
     </div>
   </div>
 </section>
